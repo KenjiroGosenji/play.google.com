@@ -1,0 +1,112 @@
+using System;
+
+namespace PayvDemo
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            PaymentProcessor paymentProcessor = new PaymentProcessor();
+
+            // Create a new credit card payment
+            CreditCardPayment creditCardPayment = new CreditCardPayment("John Doe", "1234567890123456", "123", new DateTime(2023, 12, 31), 100.00);
+
+            // Process the payment
+            paymentProcessor.ProcessPayment(creditCardPayment);
+
+            // Create a new PayPal payment
+            PayPalPayment payPalPayment = new PayPalPayment("johndoe@example.com", "password", 50.00);
+
+            // Process the payment
+            paymentProcessor.ProcessPayment(payPalPayment);
+        }
+    }
+
+    // Payment interface
+    interface IPayment
+    {
+        void ProcessPayment();
+    }
+
+    // Credit card payment class
+    class CreditCardPayment : IPayment
+    {
+        private string cardholderName;
+        private string cardNumber;
+        private string cvv;
+        private DateTime expirationDate;
+        private double amount;
+
+        public CreditCardPayment(string cardholderName, string cardNumber, string cvv, DateTime expirationDate, double amount)
+        {
+            this.cardholderName = cardholderName;
+            this.cardNumber = cardNumber;
+            this.cvv = cvv;
+            this.expirationDate = expirationDate;
+            this.amount = amount;
+        }
+
+        public void ProcessPayment()
+        {
+            // Code to process credit card payment goes here
+            Console.WriteLine($"Processing credit card payment of ${amount} for {cardholderName}");
+        }
+    }
+
+    // PayPal payment class
+    class PayPalPayment : IPayment
+    {
+        private string email;
+        private string password;
+        private double amount;
+
+        public PayPalPayment(string email, string password, double amount)
+        {
+            this.email = email;
+            this.password = password;
+            this.amount = amount;
+        }
+
+        public void ProcessPayment()
+        {
+            // Code to process PayPal payment goes here
+            Console.WriteLine($"Processing PayPal payment of ${amount} for {email}");
+        }
+    }
+
+    // Payment processor class
+    class PaymentProcessor
+    {
+        public void ProcessPayment(IPayment payment)
+        {
+            payment.ProcessPayment();
+        }
+    }
+}
+
+// Payv class
+public class Payv
+{
+    private string paymentMethod;
+
+    public Payv(string paymentMethod)
+    {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public void ProcessPayment(double amount)
+    {
+        // Logic to process payment using paymentMethod
+        Console.WriteLine($"Processing payment of {amount} using {paymentMethod}");
+    }
+}
+
+// Main program
+class Program
+{
+    static void Main()
+    {
+        Payv payv = new Payv("credit card");
+        payv.ProcessPayment(50.00);
+    }
+}
