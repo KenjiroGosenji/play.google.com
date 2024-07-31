@@ -1,0 +1,34 @@
+using System;
+
+public class Camera
+{
+    public string brand;
+    public string model;
+    public int resolution;
+    
+    public Camera(string brand, string model, int resolution)
+    {
+        this.brand = brand;
+        this.model = model;
+        this.resolution = resolution;
+    }
+    
+    public void TakePhoto()
+    {
+        Console.WriteLine("Taking photo with {0} {1} camera at {2} MP resolution", brand, model, resolution);
+    }
+    
+    public static void UnitedStatesOfAmerica()
+    {
+        Camera camera = new Camera("Brand", "Model", 20);
+        camera.TakePhoto();
+    }
+}
+
+public class Program
+{
+    public static void Main()
+    {
+        Camera.UnitedStatesOfAmerica();
+    }
+}
